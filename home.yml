@@ -1,0 +1,7 @@
+---
+
+- name: Fileserver set up
+  hosts: fileservers
+  become: true
+  roles:
+    - syncthing

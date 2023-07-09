@@ -1,0 +1,7 @@
+---
+
+image: docker.io/syncthing/syncthing:latest
+user:
+  name: syncthing
+  uid: 500
+  gid: 500

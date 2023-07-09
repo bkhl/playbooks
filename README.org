@@ -1,0 +1,5 @@
+#+TITLE: Playbooks
+
+Ansible Playbooks to set things up in my home network, for now in particular my Raspberry Pi 4 running [[https://fedoraproject.org/iot/][Fedora IOT]].
+
+This sets up various servers on that machine as Podman systemd services (a.k.a. Quadlet).
