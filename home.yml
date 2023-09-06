@@ -4,4 +4,5 @@
   hosts: fileservers
   become: true
   roles:
+    - podman
     - syncthing
