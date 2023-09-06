@@ -1,9 +1,9 @@
 ---
 
 - name: Service files installed
-  ansible.builtin.copy:
-    src: '{{ item }}'
-    dest: '/etc/containers/systemd/'
+  ansible.builtin.template:
+    src: '{{ item }}.j2'
+    dest: '/etc/containers/systemd/{{ item }}'
   loop:
     - syncthing.container
     - syncthing.volume
