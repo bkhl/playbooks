@@ -1,0 +1,19 @@
+[Unit]
+Description=Jellyfin
+Wants=network-online.target
+After=network-online.target
+
+[Container]
+Image={{ jellyfin_image }}
+HostName={{ inventory_hostname_short }}
+Volume=jellyfin-cache.volume:/cache
+Volume=jellyfin-config.volume:/config
+Volume=qbittorrent-downloads.volume:/media/downloads:ro
+User={{ jellyfin_user.uid }}
+Group={{ jellyfin_user.gid }}
+Environment=TZ={{ timezone }}
+PublishPort={{ jellyfin_port }}:{{ jellyfin_port }}/tcp
+AutoUpdate=registry
+
+[Install]
+WantedBy=multi-user.target default.target

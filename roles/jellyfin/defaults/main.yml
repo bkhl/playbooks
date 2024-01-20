@@ -1,0 +1,6 @@
+---
+jellyfin_image: docker.io/jellyfin/jellyfin:latest
+jellyfin_user:
+  uid: 1000
+  gid: 1000
+jellyfin_port: 8096
