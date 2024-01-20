@@ -7,9 +7,9 @@ default:
 build_image:
     #!/bin/bash
 
-    set -xeuo pipefail
+    set -euo pipefail
 
-    buildah images -q "{{ IMAGE }}" && exit 0
+    buildah images -q "{{ IMAGE }}" > /dev/null && exit 0
 
     ctr="$(buildah from fedora)"
     buildah run "$ctr" dnf -y install ansible-core ansible-lint git
