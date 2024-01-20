@@ -1,0 +1,18 @@
+---
+
+- name: Service files installed
+  ansible.builtin.template:
+    src: '{{ item }}.j2'
+    dest: '/etc/containers/systemd/{{ item }}'
+    mode: '0644'
+  loop:
+    - qbittorrent.container
+    - qbittorrent-config.volume
+    - qbittorrent-downloads.volume
+
+- name: Service enabled
+  ansible.builtin.systemd_service:
+    name: qbittorrent
+    daemon_reload: true
+    enabled: true
+    state: started

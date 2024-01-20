@@ -1,0 +1,22 @@
+[Unit]
+Description=qBittorrent
+Wants=network-online.target
+After=network-online.target
+
+[Container]
+Image={{ qbittorrent_image }}
+Volume=qbittorrent-config.volume:/config
+Volume=qbittorrent-downloads.volume:/downloads
+Environment=PUID={{ qbittorrent_user.uid }}
+Environment=PGID={{ qbittorrent_user.gid }}
+Environment=TZ={{ timezone }}
+Environment=WEBUI_PORT={{ qbittorrent_web_ui_port }}
+PublishPort={{ qbittorrent_web_ui_port }}:{{ qbittorrent_web_ui_port }}/tcp
+{% if qbittorrent_bittorrent_port != None %}
+PublishPort={{ qbittorrent_bittorrent_port }}:{{ qbittorrent_bittorrent_port }}/tcp
+PublishPort={{ qbittorrent_bittorrent_port }}:{{ qbittorrent_bittorrent_port }}/udp
+{% endif %}
+AutoUpdate=registry
+
+[Install]
+WantedBy=multi-user.target default.target

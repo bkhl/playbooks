@@ -1,2 +1,5 @@
 [fileservers]
-auberon
+auberon.dreaming ansible_ssh_user=bkhl
+
+[fileservers:vars]
+timezone=Europe/Stockholm
