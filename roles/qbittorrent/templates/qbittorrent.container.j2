@@ -5,6 +5,7 @@ After=network-online.target
 
 [Container]
 Image={{ qbittorrent_image }}
+HostName={{ inventory_hostname_short }}
 Volume=qbittorrent-config.volume:/config
 Volume=qbittorrent-downloads.volume:/downloads
 Environment=PUID={{ qbittorrent_user.uid }}
