@@ -5,8 +5,8 @@ podman run --rm -it \
    --ipc host \
 	-v '${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}:z' \
 	-v '${HOME}/.ssh:/root/.ssh:z' \
-	-v '${PWD}:${PWD}:z' \
-	-w '${PWD}' \
+	-v '$(CURDIR):$(CURDIR):z' \
+	-w '$(CURDIR)' \
 	-e SSH_AUTH_SOCK \
 	$(IMAGE)
 endef
