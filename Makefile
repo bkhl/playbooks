@@ -2,7 +2,7 @@ IMAGE := localhost/playbook-runner
 
 define podman-run
 podman run --rm -it \
-   --ipc host \
+	--ipc host \
 	-v '${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}:z' \
 	-v '${HOME}/.ssh:/root/.ssh:z' \
 	-v '$(CURDIR):$(CURDIR):z' \
