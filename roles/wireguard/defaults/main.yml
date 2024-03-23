@@ -1,0 +1,7 @@
+---
+
+wireguard_image: lscr.io/linuxserver/wireguard:latest
+wireguard_user:
+  uid: 1000
+  gid: 1000
+wireguard_port: 53721

@@ -1,0 +1,27 @@
+[Unit]
+Description=WireGuard
+Wants=network-online.target
+After=network-online.target
+
+[Container]
+Image={{ wireguard_image }}
+HostName={{ inventory_hostname_short }}
+Volume=wireguard-config.volume:/config
+Environment=PUID={{ wireguard_user.uid }}
+Environment=PGID={{ wireguard_user.gid }}
+Environment=TZ={{ timezone }}
+AddCapability=NET_ADMIN NET_RAW
+Sysctl=net.ipv4.conf.all.src_valid_mark=1
+Sysctl=net.ipv4.conf.all.forwarding=1
+AutoUpdate=registry
+
+# FIXME: Find a way to set up routing through WireGuard that doesn't require
+#        listing ports here.
+PublishPort={{ qbittorrent_web_ui_port }}:{{ qbittorrent_web_ui_port }}/tcp
+{% if qbittorrent_bittorrent_port != None %}
+PublishPort={{ qbittorrent_bittorrent_port }}:{{ qbittorrent_bittorrent_port }}/tcp
+PublishPort={{ qbittorrent_bittorrent_port }}:{{ qbittorrent_bittorrent_port }}/udp
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target default.target

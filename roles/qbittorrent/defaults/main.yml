@@ -1,6 +1,6 @@
 ---
 
-qbittorrent_image: quay.io/linuxserver.io/qbittorrent:latest
+qbittorrent_image: lscr.io/linuxserver/qbittorrent:latest
 qbittorrent_user:
   uid: 1000
   gid: 1000

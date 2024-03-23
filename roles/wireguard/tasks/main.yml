@@ -1,0 +1,42 @@
+---
+
+- name: Configure required kernel modules
+  ansible.builtin.copy:
+    src: wireguard.conf
+    dest: /etc/modules-load.d/wireguard.conf
+    mode: '0644'
+  register: wireguard_modules_config
+
+- name: Load required kernel modules
+  ansible.builtin.systemd_service:
+    name: systemd-modules-load
+    state: restarted
+  when: wireguard_modules_config.changed
+
+- name: Enable masquerading with firewalld
+  ansible.posix.firewalld:
+    masquerade: true
+    zone: public
+    permanent: true
+    state: enabled
+
+- name: Restart firewalld
+  ansible.builtin.systemd_service:
+    name: firewalld
+    state: restarted
+
+- name: Service files installed
+  ansible.builtin.template:
+    src: '{{ item }}.j2'
+    dest: '/etc/containers/systemd/{{ item }}'
+    mode: '0644'
+  loop:
+    - wireguard.container
+    - wireguard-config.volume
+
+- name: Service enabled
+  ansible.builtin.systemd_service:
+    name: wireguard
+    daemon_reload: true
+    enabled: true
+    state: started
