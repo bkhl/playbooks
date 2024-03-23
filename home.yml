@@ -4,7 +4,6 @@
   hosts: fileservers
   become: true
   roles:
-    - podman
     - syncthing
     - qbittorrent
     - jellyfin
