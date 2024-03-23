@@ -20,11 +20,7 @@ clean:
 	buildah rmi $(IMAGE)
 
 image:
-	$(eval CTR := $(shell buildah from fedora))
-	buildah run $(CTR) dnf -y install ansible-core ansible-lint git
-	buildah run $(CTR) dnf clean all
-	buildah run $(CTR) rm -rf /var/cache/dnf
-	buildah commit $(CTR) $(IMAGE)
+	podman build -t $(IMAGE) -f Containerfile .
 
 ansible-lint:
 	@$(podman-run) ansible-lint $(ARGS)
