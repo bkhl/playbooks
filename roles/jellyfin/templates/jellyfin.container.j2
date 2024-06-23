@@ -8,6 +8,7 @@ Image={{ jellyfin_image }}
 HostName={{ inventory_hostname_short }}
 Volume=jellyfin-cache.volume:/cache
 Volume=jellyfin-config.volume:/config
+Volume=jellyfin-music.volume:/media/music:ro
 Volume=qbittorrent-downloads.volume:/media/downloads:ro
 User={{ jellyfin_user.uid }}
 Group={{ jellyfin_user.gid }}
