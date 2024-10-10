@@ -1,4 +1,4 @@
-FROM fedora
+FROM fedora:40
 
 RUN dnf -y install ansible-core ansible-lint git && \
     dnf clean all && \
