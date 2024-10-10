@@ -9,10 +9,5 @@
     - qbittorrent.container
     - qbittorrent-config.volume
     - qbittorrent-downloads.volume
-
-- name: Service enabled
-  ansible.builtin.systemd_service:
-    name: qbittorrent
-    daemon_reload: true
-    enabled: true
-    state: started
+  notify:
+    - "qbittorrent : Enable qBittorrent service"

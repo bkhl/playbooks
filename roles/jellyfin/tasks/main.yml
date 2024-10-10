@@ -9,10 +9,5 @@
     - jellyfin.container
     - jellyfin-config.volume
     - jellyfin-cache.volume
-
-- name: Service enabled
-  ansible.builtin.systemd_service:
-    name: jellyfin
-    daemon_reload: true
-    enabled: true
-    state: started
+  notify:
+    - "jellyfin : Enable Jellyfin service"
